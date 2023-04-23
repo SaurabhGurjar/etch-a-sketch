@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    flex-grow: 1;
+}
+
+.header,
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.controls {
+    display: flex;
+    width: 200px;
+    height: 500px;
+    background-color: green;
+
+}
+
+.canvas {
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+
+}

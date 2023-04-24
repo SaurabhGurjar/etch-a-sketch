@@ -11,6 +11,10 @@ function getPixels() {
     pixels = parseInt(pixels);
     let gridSize = pixels * pixels;
 
+    if (canvas.hasChildNodes()) {
+        clearCanvas();
+    }
+
     changePixelDensity(gridSize);
 }
 
@@ -24,6 +28,14 @@ function changePixelDensity(gridSize) {
         newDiv.setAttribute('id', `${i + 1}`);
         newDiv.textContent = `${i + 1}`;
         canvas.appendChild(newDiv);
-    }    
+    }
 }
 
+// This function recursively remove element from the canvas
+function clearCanvas() {
+    if (!(canvas.hasChildNodes())) {
+        return;
+    }
+    canvas.removeChild(canvas.childNodes[(canvas.childNodes.length - 1)]);
+    clearCanvas();
+}

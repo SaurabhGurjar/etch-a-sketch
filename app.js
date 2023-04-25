@@ -1,5 +1,5 @@
 const WIDTH = 480;
-const MAXPIXELS = 100;
+let pixelDensity = 16;
 let pixels = 16;
 let pixelSize, gridSize;
 let isDrawing = false;
@@ -11,28 +11,22 @@ let penColor = '#000000';
 
 const canvas = document.querySelector('.canvas');
 const pickColor = document.getElementById('pen-color');
+const pixelRange = document.querySelector('.user-input');
 
 // Butttons
-const setSize = document.querySelector('.user-input');
 const pen = document.querySelector('.pen');
 const eraser = document.querySelector('.eraser');
 const rgbPen = document.querySelector('.rgb-pen');
 const clear = document.querySelector('.clear-canvas');
 
-pixelSize = Math.floor(WIDTH / pixels);
-gridSize = pixels * pixels;
+pixelSize = WIDTH / pixelDensity;
+gridSize = pixelDensity * pixelDensity;
 
 
 // Prompt user to get total pixels
 function getPixels() {
-    let pixel;
-    do {
-        pixel = prompt('Enter the Number of Pixels(2 for 2 X 2 grid)!', `Value must be below ${MAXPIXELS}`);
-    } while (pixel > MAXPIXELS);
-    if (pixel === null) {
-        pixel = pixels;
-    }
-    return parseInt(pixel);
+    pixelDensity = pixelRange.value;
+    return parseInt(pixelDensity);
 }
 
 // Draw grid on canvas
@@ -83,7 +77,7 @@ function clearCanvas() {
 }
 
 // Get input from the user
-setSize.addEventListener('click', () => {
+pixelRange.addEventListener('click', () => {
     pixels = getPixels();
     pixelSize = (WIDTH / pixels);
     gridSize = pixels * pixels;

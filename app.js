@@ -3,15 +3,17 @@ const MAXPIXELS = 100;
 let pixels = 16;
 let pixelSize, gridSize;
 let isDrawing = false;
-let penClicked = false;
+let penClicked = true;
 let eraserClicked = false;
 let rgbPenClicked = false;
 let hue = 0;
+let penColor = '#000000';
 
 const canvas = document.querySelector('.canvas');
+const pickColor = document.getElementById('pen-color');
+
 // Butttons
 const setSize = document.querySelector('.user-input');
-const pickColor = document.querySelector('.pen-color');
 const pen = document.querySelector('.pen');
 const eraser = document.querySelector('.eraser');
 const rgbPen = document.querySelector('.rgb-pen');
@@ -42,7 +44,7 @@ function drawPixels(gridSize, pixelSize) {
     for (let i = 0; i < gridSize; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('id', `${i}`);
-        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: white');
+        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: white', 'user-select: none');
         canvas.appendChild(newDiv);
     }
 }
@@ -58,15 +60,15 @@ function removePixels() {
 
 // Draw on (and Eraser from) canvas
 function draw (e) {
+    // Not draw if mouse button is not pressed
     if (!isDrawing) return
 
-    if(penClicked) e.target.style.backgroundColor = 'black';
+    if(penClicked) e.target.style.backgroundColor = penColor;
     else if (eraserClicked) e.target.style.backgroundColor = 'white';
     else if (rgbPenClicked) {
         e.target.style.backgroundColor =`hsl(${hue}, 100%, 50%)`;
         hue++
         if (hue >= 360) hue = 0;
-        console.log(hue);
     }
 }
 
@@ -79,8 +81,6 @@ function clearCanvas() {
         i++;
     }
 }
-
-drawPixels(gridSize, pixelSize);
 
 // Get input from the user
 setSize.addEventListener('click', () => {
@@ -111,3 +111,6 @@ rgbPen.addEventListener('click', () => {
     eraserClicked = false;
 });
 clear.addEventListener('click', clearCanvas);
+pickColor.addEventListener('input', () => penColor = pickColor.value);
+
+drawPixels(gridSize, pixelSize);

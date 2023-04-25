@@ -23,13 +23,22 @@
         <!-- Content -->
         <div class="main">
             <div class="controls">
-            <h3>Change pixel size</h3>
-            <button class="user-input">Set Size</button>
-            <button class="pen-color">Color</button>
-            <button class="pen">Pen</button>
-            <button class="eraser">Eraser</button>
-            <button class="rgb-pen">RGB Pen</button>
-            <button class="clear-canvas">Clear</button>
+                <h3 class="tools">Drawing Tools</h3>
+                <div class="change-pixel-container">
+                    <input type="range" class="user-input" id="pd" min="1" max="64" value="16">
+                    <div class="show-pd">
+                        <label for="pd">Pixel Density</label>
+                        <p class="show-pd-value"></p>
+                    </div>
+                </div>
+                <div class="color-container">
+                    <input type="color" id="pen-color" value="#000000">
+                    <label for="pen-color">Pen color</label>
+                </div>
+                <button class="pen">Pen</button>
+                <button class="eraser">Eraser</button>
+                <button class="rgb-pen">RGB Pen</button>
+                <button class="clear-canvas">Clear</button>
 
             </div>
             <div class="canvas"></div>

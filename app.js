@@ -20,7 +20,7 @@ pixelSize = Math.floor(WIDTH / pixels);
 gridSize = pixels * pixels;
 
 
-// Get the Number of pixels from the user
+// Prompt user to get total pixels
 function getPixels() {
     let pixel;
     do {
@@ -29,7 +29,6 @@ function getPixels() {
     if (pixel === null) {
         pixel = pixels;
     }
-    console.log(pixel);
     return parseInt(pixel);
 }
 
@@ -57,17 +56,20 @@ function clearCanvas() {
     clearCanvas();
 }
 
-// Draw on canvas
+// Draw on (and Eraser from) canvas
 function draw (e) {
     if (!isDrawing) return
-    e.target.style.backgroundColor = 'black';
-    console.log(e);
+
+    if(penClicked) e.target.style.backgroundColor = 'black';
+    else if (eraserClicked) e.target.style.backgroundColor = 'white';
 }
 
-drawPixels(gridSize, pixelSize);
 
+
+drawPixels(gridSize, pixelSize);
 draw();
 
+// Get input from the user
 setSize.addEventListener('click', () => {
     pixels = getPixels();
     pixelSize = (WIDTH / pixels);
@@ -75,10 +77,23 @@ setSize.addEventListener('click', () => {
     drawPixels(gridSize, pixelSize);
 });
 
+// Draw when mouse click or mouse click+drag
 canvas.addEventListener('mousedown', (e) => {
     isDrawing = true;
     draw(e);
 });
-
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mousemove', (e) => draw(e));
+
+// Tools controls
+pen.addEventListener('click', () => penClicked = true);
+eraser.addEventListener('click', () => {
+    eraserClicked = true;
+    penClicked = false;
+    rgbPenClicked = false;
+});
+rgbPen.addEventListener('click', () => {
+    rgbPenClicked = true;
+    penClicked = false;
+    eraserClicked = false;
+});

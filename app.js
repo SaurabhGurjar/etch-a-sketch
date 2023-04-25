@@ -9,6 +9,7 @@ let rgbPenClicked = false;
 let hue = 0;
 let penColor = '#000000';
 
+const pd = document.querySelector('.show-pd-value');
 const canvas = document.querySelector('.canvas');
 const pickColor = document.getElementById('pen-color');
 const pixelRange = document.querySelector('.user-input');
@@ -21,6 +22,7 @@ const clear = document.querySelector('.clear-canvas');
 
 pixelSize = WIDTH / pixelDensity;
 gridSize = pixelDensity * pixelDensity;
+pd.textContent = `${pixelDensity} X ${pixelDensity}`;
 
 
 // Prompt user to get total pixels
@@ -41,6 +43,7 @@ function drawPixels(gridSize, pixelSize) {
         newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: white', 'user-select: none');
         canvas.appendChild(newDiv);
     }
+    pd.textContent = `${pixelDensity} X ${pixelDensity}`;
 }
 
 // This function recursively remove element from the canvas

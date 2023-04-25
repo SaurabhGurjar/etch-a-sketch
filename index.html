@@ -12,7 +12,9 @@
 
 <body>
 
-    <div class="container">
+    <!-- Disable text selection(user-select: none) because some canvas element are
+        get selected and then they cause problem with function with drawing tools -->
+    <div class="container" style="user-select: none">
         <!-- Header -->
         <div class="header">
             <h1 class="heading">Etch A Sketch</h1>

@@ -36,15 +36,7 @@ body {
     font-size: 4em;
 }
 
-.controls {
-    display: flex;
-    height: 480px;
-    width: auto;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;  
-}
-
+/* Canvas */
 .canvas {
     display: flex;
     flex-wrap: wrap;
@@ -54,4 +46,51 @@ body {
     align-items: flex-start;
     background-color: white;
     box-shadow: 0 0 12px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Tools */
+.tools {
+    display: flex;
+    height: 480px;
+    width: 10rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;  
+}
+.tools-heading {
+    margin: 0;
+    padding: 0;
+}
+.change-pixel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    gap: .5rem;
+}
+.show-pd {
+    display: flex;
+    padding: 0;
+    margin: 0;    
+}
+.show-pd-value {
+    padding: 0;
+    margin: 0;
+}
+.color-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* Buttons */
+button {
+    display: flex;
+    width:inherit;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
 }

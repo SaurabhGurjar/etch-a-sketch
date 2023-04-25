@@ -6,6 +6,7 @@ let isDrawing = false;
 let penClicked = false;
 let eraserClicked = false;
 let rgbPenClicked = false;
+let hue = 0;
 
 const canvas = document.querySelector('.canvas');
 // Butttons
@@ -35,7 +36,7 @@ function getPixels() {
 // Draw grid on canvas
 function drawPixels(gridSize, pixelSize) {
     if (canvas.hasChildNodes()) {
-        clearCanvas();
+        removePixels();
     }
 
     for (let i = 0; i < gridSize; i++) {
@@ -48,12 +49,12 @@ function drawPixels(gridSize, pixelSize) {
 }
 
 // This function recursively remove element from the canvas
-function clearCanvas() {
+function removePixels() {
     if (!(canvas.hasChildNodes())) {
         return;
     }
     canvas.removeChild(canvas.childNodes[(canvas.childNodes.length - 1)]);
-    clearCanvas();
+    removePixels();
 }
 
 // Draw on (and Eraser from) canvas
@@ -62,9 +63,13 @@ function draw (e) {
 
     if(penClicked) e.target.style.backgroundColor = 'black';
     else if (eraserClicked) e.target.style.backgroundColor = 'white';
+    else if (rgbPenClicked) {
+        e.target.style.backgroundColor =`hsl(${hue}, 100%, 50%)`;
+        hue++
+        if (hue >= 360) hue = 0;
+        console.log(hue);
+    }
 }
-
-
 
 drawPixels(gridSize, pixelSize);
 draw();

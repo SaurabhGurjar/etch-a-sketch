@@ -41,9 +41,8 @@ function drawPixels(gridSize, pixelSize) {
 
     for (let i = 0; i < gridSize; i++) {
         const newDiv = document.createElement('div');
-        newDiv.className = 'pixel';
-        newDiv.setAttribute('id', `${i + 1}`);
-        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`);
+        newDiv.setAttribute('id', `${i}`);
+        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: white');
         canvas.appendChild(newDiv);
     }
 }
@@ -71,8 +70,17 @@ function draw (e) {
     }
 }
 
+// Clear canvas
+function clearCanvas() {
+    let i = 0, pixel;
+    while(i <= gridSize) {
+        pixel = document.getElementById(`${i}`);
+        pixel.style.backgroundColor = 'white';
+        i++;
+    }
+}
+
 drawPixels(gridSize, pixelSize);
-draw();
 
 // Get input from the user
 setSize.addEventListener('click', () => {
@@ -102,3 +110,4 @@ rgbPen.addEventListener('click', () => {
     penClicked = false;
     eraserClicked = false;
 });
+clear.addEventListener('click', clearCanvas);

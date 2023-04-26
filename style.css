@@ -93,4 +93,11 @@ button {
     height: 3rem;
     justify-content: center;
     align-items: center;
+    font-weight: 500;
+}
+
+.active {
+    background-color: green;
+    color: white;
+    border: none;
 }

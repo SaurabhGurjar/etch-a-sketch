@@ -8,11 +8,16 @@ let eraserClicked = false;
 let rgbPenClicked = false;
 let hue = 0;
 let penColor = '#000000';
+let leftHue = 0;
+let rightHue = 180;
+let leftColor, rightColor, swapColor;
 
 const pd = document.querySelector('.show-pd-value');
 const canvas = document.querySelector('.canvas');
 const pickColor = document.getElementById('pen-color');
 const pixelRange = document.querySelector('.user-input');
+const divider = document.querySelector('.divider');
+const footerText = document.querySelector('.footer-text');
 
 // Butttons
 const pen = document.querySelector('.pen');
@@ -79,6 +84,23 @@ function clearCanvas() {
     }
 }
 
+// Change footer:- divider color and text color
+function changeColor() {
+        leftColor = `hsl(${leftHue}, 100%, 50%)`;
+        rightColor = `hsl(${rightHue}, 100%, 50%)`;
+        divider.style.background = "linear-gradient(to right, " + leftColor + ", " + rightColor + ")";
+        footerText.setAttribute('style', `background: linear-gradient(to right, ${leftColor}, ${rightColor}); -webkit-background-clip: text; -webkit-text-fill-color: transparent`);
+        if (leftHue >= 90) {
+            leftHue = 0;
+        } else if (rightHue >= 360) {
+            rightHue = 270;
+        }
+        leftHue++; 
+        rightHue++;
+        
+        setTimeout(() => {changeColor();}, 20);
+}
+
 // Get input from the user
 pixelRange.addEventListener('click', () => {
     pixels = getPixels();
@@ -115,7 +137,7 @@ rgbPen.addEventListener('click', () => {
     eraser.classList.remove('active');
     pen.classList.remove('active');
     rgbPen.classList.add('active');
-    
+
 });
 
 clear.addEventListener('click', clearCanvas);
@@ -125,3 +147,4 @@ canvas.addEventListener('mousemove', (e) => draw(e));
 
 
 drawPixels(gridSize, pixelSize);
+changeColor();

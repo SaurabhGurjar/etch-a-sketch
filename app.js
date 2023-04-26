@@ -1,4 +1,4 @@
-const WIDTH = 480;
+const WIDTH = 500;
 let pixelDensity = 16;
 let pixels = 16;
 let pixelSize, gridSize;

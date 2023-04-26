@@ -36,11 +36,11 @@ function drawPixels(gridSize, pixelSize) {
     if (canvas.hasChildNodes()) {
         removePixels();
     }
-    
+
     for (let i = 0; i < gridSize; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('id', `${i}`);
-        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: white', 'user-select: none');
+        newDiv.setAttribute('style', `width: ${pixelSize}px; height: ${pixelSize}px`, 'background-color: ', 'user-select: none');
         canvas.appendChild(newDiv);
     }
     pd.textContent = `${pixelDensity} X ${pixelDensity}`;
@@ -56,13 +56,13 @@ function removePixels() {
 }
 
 // Draw on (and Eraser from) canvas
-function draw (e) {
+function draw(e) {
     // Not draw if mouse button is not pressed
     if (!isDrawing) return
     let targetDiv = e.target;
-    if(penClicked) targetDiv.style.backgroundColor = penColor;
+    if (penClicked) targetDiv.style.backgroundColor = penColor;
     else if (rgbPenClicked) {
-        targetDiv.style.backgroundColor =`hsl(${hue}, 100%, 50%)`;
+        targetDiv.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
         hue++
         if (hue >= 360) hue = 0;
     }
@@ -72,9 +72,9 @@ function draw (e) {
 // Clear canvas
 function clearCanvas() {
     let i = 0, pixel;
-    while(i <= gridSize) {
+    while (i <= gridSize) {
         pixel = document.getElementById(`${i}`);
-        pixel.style.backgroundColor = '';
+        if (!(pixel === null)) pixel.style.backgroundColor = '';
         i++;
     }
 }
@@ -117,7 +117,7 @@ rgbPen.addEventListener('click', () => {
     eraser.classList.remove('active');
     pen.classList.remove('active');
     rgbPen.classList.add('active');
-    
+
 });
 clear.addEventListener('click', clearCanvas);
 pickColor.addEventListener('input', () => penColor = pickColor.value);

@@ -57,7 +57,7 @@ function removePixels() {
 
 // Draw on (and Eraser from) canvas
 function draw(e) {
-    // Not draw if mouse button is not pressed
+    // Not draw if mouse button is not pressed continously
     if (!isDrawing) return
     let targetDiv = e.target;
     if (penClicked) targetDiv.style.backgroundColor = penColor;
@@ -92,8 +92,6 @@ canvas.addEventListener('mousedown', (e) => {
     isDrawing = true;
     draw(e);
 });
-canvas.addEventListener('mouseup', () => isDrawing = false);
-canvas.addEventListener('mousemove', (e) => draw(e));
 
 // Tools controls
 pen.addEventListener('click', () => {
@@ -117,9 +115,13 @@ rgbPen.addEventListener('click', () => {
     eraser.classList.remove('active');
     pen.classList.remove('active');
     rgbPen.classList.add('active');
-
+    
 });
+
 clear.addEventListener('click', clearCanvas);
 pickColor.addEventListener('input', () => penColor = pickColor.value);
+document.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mousemove', (e) => draw(e));
+
 
 drawPixels(gridSize, pixelSize);

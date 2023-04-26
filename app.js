@@ -36,7 +36,7 @@ function drawPixels(gridSize, pixelSize) {
     if (canvas.hasChildNodes()) {
         removePixels();
     }
-
+    
     for (let i = 0; i < gridSize; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('id', `${i}`);
@@ -59,14 +59,14 @@ function removePixels() {
 function draw (e) {
     // Not draw if mouse button is not pressed
     if (!isDrawing) return
-
-    if(penClicked) e.target.style.backgroundColor = penColor;
-    else if (eraserClicked) e.target.style.backgroundColor = 'white';
+    let targetDiv = e.target;
+    if(penClicked) targetDiv.style.backgroundColor = penColor;
     else if (rgbPenClicked) {
-        e.target.style.backgroundColor =`hsl(${hue}, 100%, 50%)`;
+        targetDiv.style.backgroundColor =`hsl(${hue}, 100%, 50%)`;
         hue++
         if (hue >= 360) hue = 0;
     }
+    else if (eraserClicked) targetDiv.style.backgroundColor = '';
 }
 
 // Clear canvas
@@ -74,7 +74,7 @@ function clearCanvas() {
     let i = 0, pixel;
     while(i <= gridSize) {
         pixel = document.getElementById(`${i}`);
-        pixel.style.backgroundColor = 'white';
+        pixel.style.backgroundColor = '';
         i++;
     }
 }
@@ -96,16 +96,28 @@ canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mousemove', (e) => draw(e));
 
 // Tools controls
-pen.addEventListener('click', () => penClicked = true);
+pen.addEventListener('click', () => {
+    penClicked = true;
+    eraser.classList.remove('active');
+    rgbPen.classList.remove('active');
+    pen.classList.add('active');
+});
 eraser.addEventListener('click', () => {
     eraserClicked = true;
     penClicked = false;
     rgbPenClicked = false;
+    pen.classList.remove('active');
+    rgbPen.classList.remove('active');
+    eraser.classList.add('active');
 });
 rgbPen.addEventListener('click', () => {
     rgbPenClicked = true;
     penClicked = false;
     eraserClicked = false;
+    eraser.classList.remove('active');
+    pen.classList.remove('active');
+    rgbPen.classList.add('active');
+    
 });
 clear.addEventListener('click', clearCanvas);
 pickColor.addEventListener('input', () => penColor = pickColor.value);

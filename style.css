@@ -8,14 +8,13 @@ body {
 }
 
 .container {
+    height: 52rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     max-width: 80%;
     margin: 0 auto;
-    height: 100%;
 }
 
 .main {
@@ -30,6 +29,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .heading {
@@ -179,4 +179,18 @@ input[type="range"]:hover::-moz-range-thumb,
 input[type="range"]:active::-moz-range-thumb,
 input[type="range"]:focus::-moz-range-thumb {
     background: #333;
+}
+
+/* Footer */
+.divider {
+    width: 50%;
+    height: .5rem;
+    border-radius: .25rem;
+    padding: 0; 
+}
+
+.footer-text {
+    padding: .5rem 0 0 0;
+    margin: 0;
+    font-size: 1.2em;
 }
